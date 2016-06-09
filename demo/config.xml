@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    id="com.google.browsertab.demo"
+    version="0.1.0">
+    <name>BrowserTabDemo</name>
+    <description>
+        A sample Cordova application that demonstrates the use of
+        cordova-plugin-browsertab.
+    </description>
+    <author>Google, Inc.</author>
+
+    <content src="index.html" />
+
+    <plugin name="cordova-plugin-inappbrowser" spec="^1.4.0" />
+    <plugin name="cordova-plugin-browsertab" spec="^0.1.0" />
+
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="23" />
+</widget>
