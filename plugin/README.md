@@ -17,7 +17,7 @@ on iOS.
 
 To open a URL in an in-app browser tab on a compatible platform:
 
-    cordova.plugins.inappbrowsertab.openUrl('https://www.google.com');
+    cordova.plugins.browsertab.openUrl('https://www.google.com');
 
 This plugin is designed to complement cordova-plugin-inappbrowser. No fallback
 is triggered automatically, you need to test whether it will succeed, and then
@@ -31,11 +31,11 @@ Complete example with fallback handling:
     var testURL = 'https://www.google.com';
 
     document.querySelector("#tabwithfallback").addEventListener('click', function(ev) {
-    cordova.plugins.inappbrowsertab.isAvailable(function(result) {
+    cordova.plugins.browsertab.isAvailable(function(result) {
         if (!result) {
           cordova.InAppBrowser.open(testURL, '_system');
         } else {
-          cordova.plugins.inappbrowsertab.openUrl(
+          cordova.plugins.browsertab.openUrl(
               testURL,
               function(successResp) {},
               function(failureResp) {
