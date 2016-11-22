@@ -18,8 +18,14 @@
 #import <SafariServices/SafariServices.h>
 
 @interface CBTBrowserTab : CDVPlugin
+{
+    @protected
+    SFSafariViewController* _safari;
+}
 
 - (void) isAvailable:(CDVInvokedUrlCommand*)command;
 - (void) openUrl:(CDVInvokedUrlCommand*)command;
+- (void) close:(CDVInvokedUrlCommand*)command;
+
 
 @end
