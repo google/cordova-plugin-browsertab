@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-browsertab.BrowserTab", function(require, exports, module) {
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -30,5 +29,3 @@ exports.close = function(opt_error) {
   var error = (!opt_error) ? doNothing : opt_error;
     exec(doNothing, error, 'BrowserTab', 'close', []);
 };
-
-});
