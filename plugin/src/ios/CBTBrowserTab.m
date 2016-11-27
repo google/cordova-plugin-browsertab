@@ -50,9 +50,9 @@
                                     callbackId:command.callbackId];
     }
 
-    _safari = [[SFSafariViewController alloc] initWithURL:  url];
+    _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
 
-    [self.viewController presentViewController:_safari
+    [self.viewController presentViewController:_safariViewController
                                       animated:YES
                                     completion:nil];
 
@@ -63,10 +63,11 @@
 }
 
 - (void) close:(CDVInvokedUrlCommand*)command {
-    if (!_safari)
+    if (!_safariViewController) {
         return;
-    [_safari dismissViewControllerAnimated:YES completion:nil];
-    _safari = nil;
+    }
+    [_safariViewController dismissViewControllerAnimated:YES completion:nil];
+    _safariViewController = nil;
 }
 
 @end

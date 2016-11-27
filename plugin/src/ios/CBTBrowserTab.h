@@ -17,15 +17,14 @@
 #import <Cordova/CDVPlugin.h>
 #import <SafariServices/SafariServices.h>
 
-@interface CBTBrowserTab : CDVPlugin
-{
+@interface CBTBrowserTab : CDVPlugin {
     @protected
-    SFSafariViewController* _safari;
+    SFSafariViewController* _safariViewController;
 }
 
-- (void) isAvailable:(CDVInvokedUrlCommand*)command;
-- (void) openUrl:(CDVInvokedUrlCommand*)command;
-- (void) close:(CDVInvokedUrlCommand*)command;
+- (void)isAvailable:(CDVInvokedUrlCommand* )command;
+- (void)openUrl:(CDVInvokedUrlCommand* )command;
+- (void)close:(CDVInvokedUrlCommand *)command;;
 
 
 @end
