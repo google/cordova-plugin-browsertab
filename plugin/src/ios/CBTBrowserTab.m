@@ -50,10 +50,9 @@
                                     callbackId:command.callbackId];
     }
 
-    SFSafariViewController *sfvc =
-            [[SFSafariViewController alloc] initWithURL: url];
+    _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
 
-    [self.viewController presentViewController:sfvc
+    [self.viewController presentViewController:_safariViewController
                                       animated:YES
                                     completion:nil];
 
@@ -61,6 +60,14 @@
             [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result
                                 callbackId:command.callbackId];
+}
+
+- (void) close:(CDVInvokedUrlCommand*)command {
+    if (!_safariViewController) {
+        return;
+    }
+    [_safariViewController dismissViewControllerAnimated:YES completion:nil];
+    _safariViewController = nil;
 }
 
 @end
