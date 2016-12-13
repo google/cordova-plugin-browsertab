@@ -40,6 +40,9 @@ var app = {
                 error.textContent = 'failed to launch browser tab';
                 error.style.display = '';
               });
+          // Uncomment to test the SVC close functionality. Normally this would
+          // be done as the result of an incoming link.
+          //setTimeout(function() { cordova.plugins.browsertab.close() }, 3000);
         }
       },
       function(isAvailableError) {

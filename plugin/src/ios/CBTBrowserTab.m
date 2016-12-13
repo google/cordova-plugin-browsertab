@@ -16,58 +16,47 @@
 
 #import "CBTBrowserTab.h"
 
-@implementation CBTBrowserTab
-
-- (void) isAvailable:(CDVInvokedUrlCommand*)command {
-    BOOL available = ([SFSafariViewController class] != nil);
-    CDVPluginResult *result =
-                [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                  messageAsBool:available];
-    [self.commandDelegate
-            sendPluginResult:result
-                  callbackId:command.callbackId];
+@implementation CBTBrowserTab {
+  SFSafariViewController *_safariViewController;
 }
 
-- (void) openUrl:(CDVInvokedUrlCommand*)command {
-    NSString *urlString = [command.arguments objectAtIndex:0];
-    if (urlString == nil) {
-        CDVPluginResult *result =
-                [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                  messageAsString:@"url can't be empty"];
-        [self.commandDelegate sendPluginResult:result
-                                    callbackId:command.callbackId];
-        return;
-    }
-
-    NSURL *url = [NSURL URLWithString:urlString];
-
-    if ([SFSafariViewController class] != nil) {
-        NSString *errorMessage = @"in app browser tab not available";
-        CDVPluginResult *result =
-                [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                  messageAsString:errorMessage];
-        [self.commandDelegate sendPluginResult:result
-                                    callbackId:command.callbackId];
-    }
-
-    _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
-
-    [self.viewController presentViewController:_safariViewController
-                                      animated:YES
-                                    completion:nil];
-
-    CDVPluginResult *result =
-            [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:result
-                                callbackId:command.callbackId];
+- (void)isAvailable:(CDVInvokedUrlCommand *)command {
+  BOOL available = ([SFSafariViewController class] != nil);
+  CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                messageAsBool:available];
+  [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
-- (void) close:(CDVInvokedUrlCommand*)command {
-    if (!_safariViewController) {
-        return;
-    }
-    [_safariViewController dismissViewControllerAnimated:YES completion:nil];
-    _safariViewController = nil;
+- (void)openUrl:(CDVInvokedUrlCommand *)command {
+  NSString *urlString = command.arguments[0];
+  if (urlString == nil) {
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                messageAsString:@"url can't be empty"];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    return;
+  }
+
+  NSURL *url = [NSURL URLWithString:urlString];
+  if ([SFSafariViewController class] != nil) {
+    NSString *errorMessage = @"in app browser tab not available";
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                messageAsString:errorMessage];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+  }
+
+  _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
+  [self.viewController presentViewController:_safariViewController animated:YES completion:nil];
+
+  CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+  [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+- (void)close:(CDVInvokedUrlCommand *)command {
+  if (!_safariViewController) {
+    return;
+  }
+  [_safariViewController dismissViewControllerAnimated:YES completion:nil];
+  _safariViewController = nil;
 }
 
 @end
