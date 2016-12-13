@@ -3,7 +3,7 @@
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-browsertab"
-    version="0.1.0">
+    version="0.2.0">
     <name>cordova-plugin-browsertab</name>
     <description>
         This plugin provides an interface to in-app browser tabs that exist on
