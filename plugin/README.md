@@ -64,3 +64,20 @@ Then from the root directory:
     cordova platform add android
     cordova run android
 
+## Development
+
+During development if you want to make changes to the plugin you need to force
+a rebuild and add the plugin from source, like so (from the demo directory):
+
+    cordova plugin remove cordova-plugin-browsertab
+    cordova plugin add ../plugin
+
+To refresh the platform build:
+
+    cordova platform remove ios
+    cordova platform add ios
+
+To set breakpoints, etc, open the project in the code editor:
+
+    cordova platform add ios
+    open platforms/ios/BrowserTabDemo.xcworkspace

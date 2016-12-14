@@ -19,7 +19,8 @@
 
 @interface CBTBrowserTab : CDVPlugin
 
-- (void) isAvailable:(CDVInvokedUrlCommand*)command;
-- (void) openUrl:(CDVInvokedUrlCommand*)command;
+- (void)isAvailable:(CDVInvokedUrlCommand *)command;
+- (void)openUrl:(CDVInvokedUrlCommand *)command;
+- (void)close:(CDVInvokedUrlCommand *)command;
 
 @end

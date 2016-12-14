@@ -61,6 +61,9 @@ public class BrowserTab extends CordovaPlugin {
       isAvailable(callbackContext);
     } else if ("openUrl".equals(action)) {
       openUrl(args, callbackContext);
+    } else if ("close".equals(action)) {
+      // close is a NOP on Android
+      return true;
     } else {
       return false;
     }
