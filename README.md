@@ -13,6 +13,22 @@ implementation), and
 [SFSafariViewController](https://developer.apple.com/library/ios/documentation/SafariServices/Reference/SFSafariViewController_Ref/)
 on iOS.
 
+## Installation
+You can install this plugin directly from Github using:
+```bash
+cordova plugin add https://github.com/8eo/cordova-plugin-browsertab#update-android-part
+```
+
+## Parameters
+Plugin can be customized by providing parameters during installation. You can customize i.e. custom tab background color by passing `CUSTOM_TAB_COLOR_RGB` variable in string RGB format:
+```bash
+cordova plugin add https://github.com/8eo/cordova-plugin-browsertab#update-android-part --variable CUSTOM_TAB_COLOR_RGB="#ff0000"
+```
+
+List of available parameters:
+
+* **CUSTOM_TAB_COLOR_RGB** - Customize custom tab background color. Pass value as a RGB string `#RRGGBB`
+
 ## Usage
 
 To open a URL in an in-app browser tab on a compatible platform:
