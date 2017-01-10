@@ -112,13 +112,12 @@ public class BrowserTab extends CordovaPlugin {
     cordova.getActivity().startActivity(customTabsIntent);
   */
 
-    String url = Uri.parse(urlStr);
     CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 
     //builder.setToolbarColor(colorParser.parseColor());
 
     CustomTabsIntent customTabsIntent = builder.build();
-    customTabsIntent.launchUrl(this, Uri.parse(url));
+    customTabsIntent.launchUrl(this, Uri.parse(urlStr));
 
 
     Log.d(LOG_TAG, "in app browser call dispatched");
