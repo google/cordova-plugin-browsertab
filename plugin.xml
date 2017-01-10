@@ -15,7 +15,9 @@
     <js-module name="BrowserTab" src="www/browsertab.js">
         <clobbers target="cordova.plugins.browsertab" />
     </js-module>
-
+  
+    <preference name="CUSTOM_TAB_COLOR_RGB" default="#ffffff" />
+  
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="BrowserTab">
@@ -27,6 +29,12 @@
             target-dir="src/com/google/cordova/plugin" />
         <framework src="com.android.support:customtabs:23.3.0"/>
         <framework src="src/android/BrowserTab.gradle" custom="true" type="gradleReference"/>
+  
+      <source-file src="src/android/res/browsertab.xml" target-dir="res/values" />
+      <config-file target="res/values/browsertab.xml" parent="/*">
+        <string name="CUSTOM_TAB_COLOR_RGB">$CUSTOM_TAB_COLOR_RGB</string>
+      </config-file>
+        
     </platform>
 
     <platform name="ios">
