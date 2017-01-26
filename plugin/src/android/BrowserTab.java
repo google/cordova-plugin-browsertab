@@ -53,6 +53,7 @@ public class BrowserTab extends CordovaPlugin {
 
   private boolean mFindCalled = false;
   private String mCustomTabsBrowser;
+  private String toolbarColor = "#ffffff";
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
@@ -95,6 +96,17 @@ public class BrowserTab extends CordovaPlugin {
       return;
     }
 
+    JSONObject themeableArgs;
+    try {
+        themeableArgs = new JSONObject(args.optString(1));
+        if (themeableArgs.getString("statusBarColor") != null) {
+            Log.d( LOG_TAG, "soy arg " + args.optString(1) );
+            toolbarColor = themeableArgs.getString("statusBarColor");
+        }
+    } catch (JSONException e) {
+        Log.d(LOG_TAG, "openUrl themeableArgs: failed to parse theme parameters" + args);
+    }
+
     String customTabsBrowser = findCustomTabBrowser();
     if (customTabsBrowser == null) {
       Log.d(LOG_TAG, "openUrl: no in app browser tab available");
@@ -102,6 +114,7 @@ public class BrowserTab extends CordovaPlugin {
     }
 
     CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+    builder.setToolbarColor( Color.parseColor(toolbarColor));
     builder.addDefaultShareMenuItem();
     Intent customTabsIntent = builder.build().intent;
     customTabsIntent.setData(Uri.parse(urlStr));

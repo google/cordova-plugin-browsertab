@@ -18,10 +18,11 @@ exports.isAvailable = function(success, error) {
   exec(success, error, 'BrowserTab', 'isAvailable', []);
 };
 
-exports.openUrl = function(url, opt_error) {
+exports.openUrl = function(url, themeableBrowser, opt_error) {
   var doNothing = function() {};
   var error = (!opt_error) ? doNothing : opt_error;
-  exec(doNothing, error, 'BrowserTab', 'openUrl', [url]);
+  themeableBrowser = themeableBrowser || {};
+  exec(doNothing, error, 'BrowserTab', 'openUrl', [url, themeableBrowser]);
 };
 
 exports.close = function(opt_error) {
