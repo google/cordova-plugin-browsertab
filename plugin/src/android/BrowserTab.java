@@ -99,9 +99,9 @@ public class BrowserTab extends CordovaPlugin {
     JSONObject themeableArgs;
     try {
         themeableArgs = new JSONObject(args.optString(1));
-        if (themeableArgs.getString("statusBarColor") != null) {
+        if (themeableArgs.getString("toolbarColor") != null) {
             Log.d( LOG_TAG, "soy arg " + args.optString(1) );
-            toolbarColor = themeableArgs.getString("statusBarColor");
+            toolbarColor = themeableArgs.getString("toolbarColor");
         }
     } catch (JSONException e) {
         Log.d(LOG_TAG, "openUrl themeableArgs: failed to parse theme parameters" + args);

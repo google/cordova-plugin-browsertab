@@ -15,9 +15,15 @@ on iOS.
 
 ## Usage
 
-To open a URL in an in-app browser tab on a compatible platform:
+To open a URL in an in-app browser tab on a compatible platform with Default theme:
 
     cordova.plugins.browsertab.openUrl('https://www.google.com');
+
+To open a URL in an in-app browser tab on a compatible platform with Custom theme (iOS and Android):
+
+    cordova.plugins.browsertab.openUrl('https://www.google.com', {toolbarColor:"#000000"});
+
+toolbarColor: works only with Hexa.
 
 This plugin is designed to complement cordova-plugin-inappbrowser. No fallback
 is triggered automatically, you need to test whether it will succeed, and then
