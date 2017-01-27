@@ -10,7 +10,19 @@ Note: This is not an official Google product.
 ## Installation
 
 Execute from the projects root folder:
+  ```
   $ cordova plugin add cordova-plugin-browsertab-themeable
+  ```
+
+Or install a specific version:
+  ```
+  $ cordova plugin add cordova-plugin-browsertab-themeable@VERSION
+  ```
+
+Or install the latest head version:
+  ```
+  $ cordova plugin add https://github.com/gabfiocchi/cordova-plugin-browsertab.git
+  ```
 
 ## About
 
@@ -65,36 +77,3 @@ Complete example with fallback handling:
         error.style.display = '';
       });
     });
-
-<!-- ## Building
-
-Install Cordova if you haven't already:
-
-    npm install -g cordova
-
-Then from the root directory:
-
-    cd demo
-    cordova platform add ios
-    cordova run ios
-    cordova platform add android
-    cordova run android
-
-## Development
-
-During development if you want to make changes to the plugin you need to force
-a rebuild and add the plugin from source, like so (from the demo directory):
-
-    cordova plugin remove cordova-plugin-browsertab-themeable
-    cordova plugin add ../plugin
-
-To refresh the platform build:
-
-    cordova platform remove ios
-    cordova platform add ios
-
-To set breakpoints, etc, open the project in the code editor:
-
-    cordova platform add ios
-    open platforms/ios/BrowserTabDemo.xcworkspace
- -->
