@@ -48,9 +48,9 @@
 
   _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
-      sfvc.preferredBarTintColor = [self colorFromRGBA:  [themeableArgs objectForKey:@"toolbarColor"] ?: @"#ffffff"];
+      _safariViewController.preferredBarTintColor = [self colorFromRGBA:  [themeableArgs objectForKey:@"toolbarColor"] ?: @"#ffffff"];
   } else {
-      sfvc.view.tintColor = [self colorFromRGBA:  [themeableArgs objectForKey:@"toolbarColor"] ?: @"#ffffff"];
+      _safariViewController.view.tintColor = [self colorFromRGBA:  [themeableArgs objectForKey:@"toolbarColor"] ?: @"#ffffff"];
   }
 
   [self.viewController presentViewController:_safariViewController animated:YES completion:nil];
