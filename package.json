@@ -1,0 +1,23 @@
+{
+    "name": "cordova-plugin-browsertab-themeable",
+    "version": "0.2.1",
+    "description": "In-app browser tabs for Android and iOS it's a forke modify of cordova-plugin-browsertab",
+    "cordova": {
+        "id": "cordova-plugin-browsertab-themeable",
+        "platforms": [
+            "android",
+            "ios"
+        ]
+    },
+    "keywords": [
+        "sfsafariviewcontroller",
+        "custom-tabs",
+        "browser-tabs",
+        "browser",
+        "browsertab",
+        "in-app-browser",
+        "inappbrowser"
+    ],
+    "author": "Gabriel Fiocchi",
+    "license": "Apache-2.0"
+}
