@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-package com.google.cordova.plugin.browsertab;
+package com.gabfiocchi.cordova.plugin.browsertab;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class BrowserTab extends CordovaPlugin {
 
   private boolean mFindCalled = false;
   private String mCustomTabsBrowser;
+  private String toolbarColor = "#ffffff";
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
@@ -95,13 +97,27 @@ public class BrowserTab extends CordovaPlugin {
       return;
     }
 
+    JSONObject themeableArgs;
+    try {
+        themeableArgs = new JSONObject(args.optString(1));
+        if (themeableArgs.getString("toolbarColor") != null) {
+            Log.d( LOG_TAG, "soy arg " + args.optString(1) );
+            toolbarColor = themeableArgs.getString("toolbarColor");
+        }
+    } catch (JSONException e) {
+        Log.d(LOG_TAG, "openUrl themeableArgs: failed to parse theme parameters" + args);
+    }
+
     String customTabsBrowser = findCustomTabBrowser();
     if (customTabsBrowser == null) {
       Log.d(LOG_TAG, "openUrl: no in app browser tab available");
       callbackContext.error("no in app browser tab implementation available");
     }
 
-    Intent customTabsIntent = new CustomTabsIntent.Builder().build().intent;
+    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+    builder.setToolbarColor( Color.parseColor(toolbarColor));
+    builder.addDefaultShareMenuItem();
+    Intent customTabsIntent = builder.build().intent;
     customTabsIntent.setData(Uri.parse(urlStr));
     customTabsIntent.setPackage(mCustomTabsBrowser);
     cordova.getActivity().startActivity(customTabsIntent);

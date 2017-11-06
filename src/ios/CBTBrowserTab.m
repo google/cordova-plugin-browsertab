@@ -15,6 +15,7 @@
  */
 
 #import "CBTBrowserTab.h"
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @implementation CBTBrowserTab {
   SFSafariViewController *_safariViewController;
@@ -29,6 +30,7 @@
 
 - (void)openUrl:(CDVInvokedUrlCommand *)command {
   NSString *urlString = command.arguments[0];
+  NSDictionary* themeableArgs = [command argumentAtIndex:1];
   if (urlString == nil) {
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                 messageAsString:@"url can't be empty"];
@@ -45,6 +47,12 @@
   }
 
   _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+      _safariViewController.preferredBarTintColor = [self colorFromRGBA:  [themeableArgs objectForKey:@"toolbarColor"] ?: @"#ffffff"];
+  } else {
+      _safariViewController.view.tintColor = [self colorFromRGBA:  [themeableArgs objectForKey:@"toolbarColor"] ?: @"#ffffff"];
+  }
+
   [self.viewController presentViewController:_safariViewController animated:YES completion:nil];
 
   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -57,6 +65,29 @@
   }
   [_safariViewController dismissViewControllerAnimated:YES completion:nil];
   _safariViewController = nil;
+}
+
+- (UIColor *)colorFromRGBA:(NSString *)rgba {
+    unsigned rgbaVal = 0;
+    
+    if ([[rgba substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"#"]) {
+        // First char is #, get rid of that.
+        rgba = [rgba substringFromIndex:1];
+    }
+    
+    if (rgba.length < 8) {
+        // If alpha is not given, just append ff.
+        rgba = [NSString stringWithFormat:@"%@ff", rgba];
+    }
+    
+    NSScanner *scanner = [NSScanner scannerWithString:rgba];
+    [scanner setScanLocation:0];
+    [scanner scanHexInt:&rgbaVal];
+    
+    return [UIColor colorWithRed:(rgbaVal >> 24 & 0xFF) / 255.0f
+                           green:(rgbaVal >> 16 & 0xFF) / 255.0f
+                            blue:(rgbaVal >> 8 & 0xFF) / 255.0f
+                           alpha:(rgbaVal & 0xFF) / 255.0f];
 }
 
 @end

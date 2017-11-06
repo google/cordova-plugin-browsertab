@@ -2,29 +2,27 @@
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-browsertab"
-    version="0.2.0">
-    <name>cordova-plugin-browsertab</name>
+    id="cordova-plugin-browsertab-themeable"
+    version="0.2.1">
+    <name>cordova-plugin-browsertab-themeable</name>
     <description>
-        This plugin provides an interface to in-app browser tabs that exist on
-        some mobile platforms, specifically Custom Tabs on Android and
-        SFSafariViewController on iOS.
+        This plugin provides an interface to in-app browser tabs that exist on some mobile platforms, specifically Custom Tabs on Android and SFSafariViewController on iOS it's a forke modify of cordova-plugin-browsertab.
     </description>
     <dependency id="cordova-plugin-compat" version="^1.0.0" />
 
     <js-module name="BrowserTab" src="www/browsertab.js">
-        <clobbers target="cordova.plugins.browsertab" />
+        <clobbers target="cordova.plugins.browsertab.themeable" />
     </js-module>
 
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="BrowserTab">
                 <param name="android-package"
-                    value="com.google.cordova.plugin.browsertab.BrowserTab" />
+                    value="com.gabfiocchi.cordova.plugin.browsertab.BrowserTab" />
             </feature>
         </config-file>
         <source-file src="src/android/BrowserTab.java"
-            target-dir="src/com/google/cordova/plugin" />
+            target-dir="src/com/gabfiocchi/cordova/plugin" />
         <framework src="com.android.support:customtabs:23.3.0"/>
         <framework src="src/android/BrowserTab.gradle" custom="true" type="gradleReference"/>
     </platform>
