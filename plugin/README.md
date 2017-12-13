@@ -50,6 +50,20 @@ Complete example with fallback handling:
       });
     });
 
+## Customization
+
+Plugin can be customized by providing parameters during installation.
+You can customize i.e. custom tab background color by passing `CUSTOM_TAB_COLOR_RGB` variable in string RGB format:
+
+```bash
+cordova plugin add cordova-plugin-browsertab --variable CUSTOM_TAB_COLOR_RGB="#ff0000"
+```
+
+List of available parameters:
+
+* **CUSTOM_TAB_COLOR_RGB** - Customize custom tab background color. Pass value as a RGB string `#RRGGBB`.
+                            Supported by Android only at the moment.
+
 ## Building
 
 Install Cordova if you haven't already:
