@@ -37,7 +37,7 @@
   }
 
   NSURL *url = [NSURL URLWithString:urlString];
-  if ([SFSafariViewController class] != nil) {
+  if ([SFSafariViewController class] == nil) {
     NSString *errorMessage = @"in app browser tab not available";
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                 messageAsString:errorMessage];
