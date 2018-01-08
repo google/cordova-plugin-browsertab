@@ -1,7 +1,27 @@
-def minSdkVersion = 16
+def minSdkVersion = 16;
+
+def getConfigPreference(name) {
+    name = name.toLowerCase();
+    def xml = file("res/xml/config.xml").getText();
+    def root = new XmlParser(false, false).parseText(xml);
+
+    def ret, defaultValue;
+    root.preference.each { it ->
+        def attrName = it.attribute("name");
+        if (attrName && attrName.toLowerCase() == name) {
+            if (it.attribute('default') != null) {
+                defaultValue = it.attribute('default');
+            } else {
+                ret = it.attribute("value");
+            }
+        }
+    }
+    return ret ? ret : defaultValue;
+}
 
 if(cdvMinSdkVersion == null) {
-    ext.cdvMinSdkVersion = minSdkVersion;
+    def configMinSdkVersion = getConfigPreference("android-minSdkVersion");
+    ext.cdvMinSdkVersion =  configMinSdkVersion && configMinSdkVersion.toInteger() > minSdkVersion ? configMinSdkVersion.toInteger() : minSdkVersion;
 } else if (cdvMinSdkVersion.toInteger() < minSdkVersion) {
     ext.cdvMinSdkVersion = minSdkVersion;
 }
