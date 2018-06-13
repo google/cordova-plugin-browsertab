@@ -18,6 +18,13 @@
 
 @implementation CBTBrowserTab {
   SFSafariViewController *_safariViewController;
+  UIColor *backgroundColor;
+  UIColor *controlTintColor;
+}
+
+- (void)pluginInitialize {
+  backgroundColor = [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1.0];
+  controlTintColor = [UIColor colorWithRed:0.84 green:0.00 blue:0.47 alpha:1.0];
 }
 
 - (void)isAvailable:(CDVInvokedUrlCommand *)command {
@@ -45,6 +52,10 @@
   }
 
   _safariViewController = [[SFSafariViewController alloc] initWithURL:url];
+  _safariViewController.view.backgroundColor = backgroundColor;
+  _safariViewController.preferredControlTintColor = controlTintColor;
+  _safariViewController.preferredBarTintColor = backgroundColor;
+
   [self.viewController presentViewController:_safariViewController animated:YES completion:nil];
 
   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
